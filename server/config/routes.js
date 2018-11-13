@@ -2,16 +2,20 @@ const TaskController = require('../controllers/tasks');
 
 module.exports = function(app){
     //routes and controllers
-    app.get('/', TaskController.index);
+    // show all tasks route
+    app.get('/tasks', TaskController.index);
 
-    // create user route
-    app.get('/new/:task', TaskController.create);
+    // show a task route
+    app.get('/tasks/:task', TaskController.show);
+
+    // create task route
+    app.post('/tasks', TaskController.create);
+
+    // update a task route
+    app.put('/tasks/:task', TaskController.update);
 
     // delete user route
-    app.get('/remove/:task', TaskController.destroy);
-
-    // show all users route
-    app.get('/:task', TaskController.show);
+    app.delete('/tasks/:task', TaskController.destroy);
 
     // catch 404 and forward to error handler
     app.use((request, response, next) => {
