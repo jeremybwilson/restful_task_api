@@ -12,6 +12,7 @@ import * as fromServices from './services';
 import { NavComponent } from './nav/nav.component';
 
 import { TaskResolve } from './resolvers';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { TaskResolve } from './resolvers';
     NavComponent,
     ...fromTasks.components,
     SearchPipe,
+    MessagesComponent,
 
   ],
   imports: [

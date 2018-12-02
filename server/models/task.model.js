@@ -23,9 +23,10 @@ const TaskSchema = new Schema({
         trim: true,
     },
     completed: {
-        type: Boolean,
+        type: String,
         default: false,
-        required: true,
+        required: [true, 'Completion status is required'],
+        trim: true,
     },
 }, {timestamps: true});
 

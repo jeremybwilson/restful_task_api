@@ -83,9 +83,4 @@ export class TaskListComponent implements OnInit {
     });
   }
 
-  updateTask(task: Task): void {
-    console.log('component got a request to update task', task);
-    this.taskService.updateTask(task)
-      .subscribe(data => console.log('updated task data', data));
-  }
 }

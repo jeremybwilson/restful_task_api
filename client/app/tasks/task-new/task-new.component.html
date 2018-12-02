@@ -1,4 +1,4 @@
-<section>
+<section class='task-new'>
   <h3>Create Task</h3> <span class='json-data'>{{ form?.value | json }}</span>
   <form (submit)='form.valid && onSubmit($event, form)' #form='ngForm'>
     <div class="form-row">

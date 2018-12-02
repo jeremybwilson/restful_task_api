@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { TaskService } from '../../services/task.service';
 import { Router } from '@angular/router';
 
-import { Task } from '../../models/task.model';
+import { TaskService, MessageService } from '../../services';
+import { Task } from '../../models';
 
 @Component({
   selector: 'app-task-new',
@@ -19,7 +19,8 @@ export class TaskNewComponent implements OnInit {
 
   constructor(
     private readonly taskService: TaskService,
-    private readonly router: Router
+    private readonly router: Router,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit() { }
@@ -29,11 +30,15 @@ export class TaskNewComponent implements OnInit {
     console.log('form submitted', this.task);
     this.taskService.createTask(this.task)
       .subscribe(newTask => {
+        this.messageService.clear();
         this.createTask.emit(this.task);
         this.task = new Task();
         form.reset();
         console.log('new task created', newTask);
         this.router.navigateByUrl('/');
+      }, error => {
+        this.messageService.add(error.error);
+        console.log('onSubmit() at task-new.component.ts received an error from the DB: ', error);
       });
   }
 

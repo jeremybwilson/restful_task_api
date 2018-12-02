@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
 import { Task } from '../../models';
-import { TaskService } from '../../services';
+import { TaskService, MessageService } from '../../services';
 
 @Component({
   selector: 'app-task-edit',
@@ -22,6 +22,7 @@ export class TaskEditComponent implements OnInit {
     private taskService: TaskService,
     private route: ActivatedRoute,
     private router: Router,
+    private messageService: MessageService,
   ) { }
 
   ngOnInit() {
@@ -46,9 +47,11 @@ export class TaskEditComponent implements OnInit {
     console.log(`got a request to update a task`, task);
     this.taskService.updateTask(task)
       .subscribe(data => {
+        this.messageService.clear();
         this.router.navigateByUrl('tasks');
         console.log(`updateTask() subscription got edited task`, data);
       }, error => {
+        this.messageService.add(error.error);
         console.log('updateTask() at task-edit.component.ts received error from DB: ', error);
       }
       );

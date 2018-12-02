@@ -1,11 +1,11 @@
 <section class='task-new'>
   <h3>Edit Task </h3>
-  <form (submit)='form.valid && onSubmit($event, form)' #form='ngForm'>
+  <form (submit)='form.valid && editTask(task)' #form='ngForm'>
     <div class="form-row">
       <div class="form-group col-md-5">
-
-        <label>Title: </label>
+        <label for="title">Title: </label>
         <input class='form-control' type="text" name="title"
+        placeholder='{{ task?.title }}'
         [(ngModel)]='task.title'
         required
         #title='ngModel'
@@ -22,6 +22,7 @@
       <div class="form-group col-md">
         <label for="description">Description: </label>
         <input class='form-control' type="text" name="description"
+        placeholder='{{ task?.description }}'
         [(ngModel)]='task.description'
         required
         #description='ngModel'
@@ -40,6 +41,7 @@
       <div class="form-group col-md-6">
         <label for="completed">Completed (?): </label>
         <input class='form-control' type="text" name="completed"
+        placeholder='{{ task?.completed }}'
         [(ngModel)]='task.completed'
         required
         #completed='ngModel'
@@ -47,9 +49,9 @@
         <div class="error" *ngIf='(completed?.touched || completed?.dirty) && completed?.errors'>
           <div *ngIf='completed?.errors.required'>
             You must enter a status for completion
-          </div>
-          <div *ngIf='completed?.errors.minlength'>
-            Completed must be either true or false.  The field cannot be blank.
+            <div *ngIf='completed?.errors.minlength'>
+              Entry does not meet minimum length requirement. Must be at least {{ title?.errors.minlength.requiredLength }} characters long
+            </div>
           </div>
         </div>
       </div>
