@@ -1,0 +1,15 @@
+.json-data {
+  display: inline-block;
+}
+
+.header> [class*='col']{
+  font-weight: bold;
+}
+
+.error, .red {
+  color: red;
+}
+
+.row.results [class*='col']>a, .row.results [class*='col']>button {
+  margin: 0 5px 5px 0;
+}

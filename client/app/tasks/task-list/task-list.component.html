@@ -1,0 +1,38 @@
+<h2>{{ title }}</h2>
+<div class="row" *ngIf='tasks?.length > 0'>
+    <div class="col">
+      <section class='tasks-list'>
+        <h3>All Tasks</h3>
+        <div class="row header">
+          <div class="col">
+            <input type="text" placeholder="Title" [(ngModel)]='filter.title'>
+            <button *ngIf='filter.title' (click)='filter.title = null' class="btn btn-primary btn-sm clear">X</button>
+          </div>
+          <div class="col-3">
+            <input type="text" placeholder="Description" [(ngModel)]='filter.description'>
+            <button *ngIf='filter.description' (click)='filter.description = null' class="btn btn-primary btn-sm clear">X</button></div>
+          <div class="col">Completed</div>
+          <div class="col-3">Created on</div>
+          <div class="col-2">Actions:
+              <button class="btn btn-primary btn-sm"
+              (click)='clearFilter()'
+            *ngIf='filter.title || filter.description'>X</button>
+          </div>
+        </div>
+        <div class="row results"
+          *ngFor="let task of tasks | search:filter"
+          (click)='onSelect(task)'
+          [routerLink]="task._id"
+        >
+          <div class="col">{{ task.title }}</div>
+          <div class="col-3">{{ task.description }}</div>
+          <div class="col">{{ task.completed }}</div>
+          <div class="col-3">{{ task.createdAt | date:'medium' }}</div>
+          <div class="col-2" (click)='onEvent($event)'>
+            <a routerLink='/tasks/{{ task._id }}/edit' class='btn btn-primary btn-sm'>Edit</a>
+            <button (click)='onDelete(task._id)' class='btn btn-primary btn-sm'>Delete</button>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>

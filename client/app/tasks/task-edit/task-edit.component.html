@@ -1,0 +1,59 @@
+<section class='task-new'>
+  <h3>Edit Task </h3>
+  <form (submit)='form.valid && onSubmit($event, form)' #form='ngForm'>
+    <div class="form-row">
+      <div class="form-group col-md-5">
+
+        <label>Title: </label>
+        <input class='form-control' type="text" name="title"
+        [(ngModel)]='task.title'
+        required
+        #title='ngModel'
+        minlength='2'>
+        <div class="error" *ngIf='(title?.touched || title?.dirty) && title?.errors'>
+          <div *ngIf='title?.errors.required'>
+            You must enter a title
+          </div>
+          <div *ngIf='title?.errors.minlength'>
+            Title must be at least {{ title?.errors.minlength.requiredLength }} characters.  {{ title?.errors.minlength.actualLength }} characters is not enough.
+          </div>
+        </div>
+      </div>
+      <div class="form-group col-md">
+        <label for="description">Description: </label>
+        <input class='form-control' type="text" name="description"
+        [(ngModel)]='task.description'
+        required
+        #description='ngModel'
+        min='3'>
+        <div class="error" *ngIf='(description?.touched || description?.dirty) && description?.errors'>
+          <div *ngIf='description?.errors.required'>
+            You must enter a description
+            <div *ngIf='description?.errors.minlength'>
+              Description must be at least 4 characters
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="completed">Completed (?): </label>
+        <input class='form-control' type="text" name="completed"
+        [(ngModel)]='task.completed'
+        required
+        #completed='ngModel'
+        minlength='3'>
+        <div class="error" *ngIf='(completed?.touched || completed?.dirty) && completed?.errors'>
+          <div *ngIf='completed?.errors.required'>
+            You must enter a status for completion
+          </div>
+          <div *ngIf='completed?.errors.minlength'>
+            Completed must be either true or false.  The field cannot be blank.
+          </div>
+        </div>
+      </div>
+    </div>
+    <button *ngIf='form.valid' type='submit' class='btn btn-primary btn-sm'>Submit</button>
+  </form>
+</section>

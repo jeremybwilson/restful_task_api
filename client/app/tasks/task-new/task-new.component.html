@@ -1,0 +1,52 @@
+<section>
+  <h3>Create Task</h3> <span class='json-data'>{{ form?.value | json }}</span>
+  <form (submit)='form.valid && onSubmit($event, form)' #form='ngForm'>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="">Title:</label>
+        <input type="text" class="form-control" name="title"
+        [(ngModel)]="task.title"
+        required
+        #title='ngModel'
+        minlength='3'>
+        <div *ngIf='(title?.touched || title?.dirty) && title?.errors'>
+          <div class="error" *ngIf='title?.errors.required'>
+            You must enter a title
+          </div>
+          <div *ngIf='title?.errors.minlength'>
+            Title must be at least {{ title?.errors.minlength.requiredLength }} characters.  {{ title?.errors.minlength.actualLength }} characters is not enough.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="">Description:</label>
+        <input type="text" class="form-control" name="description"
+        [(ngModel)]="task.description"
+        required
+        #description='ngModel'
+        minlength='3'>
+        <div *ngIf='(description?.touched || description?.dirty) && description?.errors'>
+          <div class="error" *ngIf='description?.errors.required'>
+            You must enter a description
+          </div>
+          <div *ngIf='description?.errors.minlength'>
+            Description must be at least {{ description?.errors.minlength.requiredLength }} characters.  {{ description?.errors.minlength.actualLength }} characters is not enough.
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-4">
+        <label for="">Completed:</label>
+        <input type="text" class="form-control" name="completed" placeholder="true or false"
+        [(ngModel)]="task.completed"
+        required
+        #completed='ngModel'
+        minlength='3'>
+      </div>
+    </div>
+    <button *ngIf='form.valid' type='submit' class="btn btn-primary btn-sm">Submit</button>
+  </form>
+</section>

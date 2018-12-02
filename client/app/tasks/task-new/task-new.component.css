@@ -1,0 +1,7 @@
+.json-data {
+  display: inline-block;
+}
+
+.error, .red {
+  color: red;
+}

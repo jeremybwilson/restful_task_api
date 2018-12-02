@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col">
+    <section class='task-details'>
+      <h3>Selected Task</h3>
+      <div class="row" *ngIf='errorMessage'>
+        <div class="col">
+          <span>{{ errorMessage }} </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">ID: </div>
+        <div class="col">{{ task._id }}</div>
+      </div>
+      <div class="row">
+        <div class="col">Title: </div>
+        <div class="col">{{ task.title }}</div>
+      </div>
+      <div class="row">
+        <div class="col">Description: </div>
+        <div class="col">{{ task.description }}</div>
+      </div>
+      <div class="row">
+        <div class="col">Status (complete): </div>
+        <div class="col">{{ task.completed }}</div>
+      </div>
+      <div class="row">
+        <div class="col">Date Created: </div>
+        <div class="col">{{ task.createdAt | date:'medium' }}</div>
+      </div>
+    </section>
+  </div>
+</div>
