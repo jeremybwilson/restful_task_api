@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { AuthService } from './services';
 
 import { Observable } from 'rxjs';
 
@@ -8,7 +10,16 @@ import { Observable } from 'rxjs';
     styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
     title = 'Task List API';
-    constructor(){ }
+    loggedIn: boolean;
+
+    constructor(private readonly authService: AuthService) { }
+
+  ngOnInit() {
+    this.authService.isLoggedIn$
+      .subscribe(loggedIn => {
+        this.loggedIn = loggedIn;
+      });
+  }
 }

@@ -29,12 +29,14 @@ export class AuthService {
     return this.http.post<User>(`${this.base}/register`, user);
   }
 
-  logout(): Observable<boolean> {
-    return this.http.delete<boolean>(`${this.base}/logoout}`)
-    .pipe(
-      tap(() => this.cookieService.removeAll()),
-      tap(() => this.isLoggedIn$.next(false))
-    );
+  // logout(): Observable<boolean> {
+  logout(): Observable<void> {
+    // return this.http.delete<boolean>(`${this.base}/logoout}`)
+    return this.http.delete<void>(`${this.base}/logout`)
+      .pipe(
+        tap(() => this.cookieService.removeAll()),
+        tap(() => this.isLoggedIn$.next(false))
+      );
   }
 
   isAuthed(): boolean {
