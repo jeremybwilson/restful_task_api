@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import * as fromTasks from '../tasks';
+import { HomeComponent } from '../home/home.component';
+import { AuthGuard } from '../auth.guard';
 import { TaskResolve } from '../resolvers';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'tasks',
-    pathMatch: 'full'
+    component: HomeComponent,
+    // redirectTo: 'tasks',
+    // pathMatch: 'full'
   },
   {
     path: 'tasks',
@@ -20,6 +23,7 @@ const routes: Routes = [
       {
         path: 'new',
         component: fromTasks.TaskNewComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: ':id',

@@ -17,13 +17,18 @@ app.use(parser.json());
 app.use( function(request, response, next){
     console.log(`requesting url: ${request.url}`);
     next();
-})
+});
+app.use(cookieParser('superSekretKitteh123'));
+app.use(logger('dev'));
 app.use(session({
+    saveUninitialized: true,
     secret:'superSekretKitteh',
     resave: false,
-    saveUninitialized: false,
+    name: 'session',
+    rolling: true,
     cookie: {
-        secure: false, 
+        secure: false,
+        httpOnly: false,
         maxAge: 600000
     }
 }));
